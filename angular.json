@@ -72,7 +72,8 @@
 						"browserTarget": "checkin:build",
 						"compodoc": true,
 						"compodocArgs": ["-e", "json", "-d", "."],
-						"port": 6006
+						"port": 6006,
+						"styles": ["src/styles.scss"]
 					}
 				},
 				"build-storybook": {
