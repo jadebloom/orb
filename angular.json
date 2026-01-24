@@ -6,7 +6,7 @@
 	},
 	"newProjectRoot": "projects",
 	"projects": {
-		"tmp": {
+		"checkin": {
 			"projectType": "application",
 			"schematics": {},
 			"root": "",
@@ -54,10 +54,10 @@
 					"builder": "@angular/build:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "tmp:build:production"
+							"buildTarget": "checkin:build:production"
 						},
 						"development": {
-							"buildTarget": "tmp:build:development"
+							"buildTarget": "checkin:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -69,7 +69,7 @@
 					"builder": "@storybook/angular:start-storybook",
 					"options": {
 						"configDir": ".storybook",
-						"browserTarget": "tmp:build",
+						"browserTarget": "checkin:build",
 						"compodoc": true,
 						"compodocArgs": ["-e", "json", "-d", "."],
 						"port": 6006
@@ -79,7 +79,7 @@
 					"builder": "@storybook/angular:build-storybook",
 					"options": {
 						"configDir": ".storybook",
-						"browserTarget": "tmp:build",
+						"browserTarget": "checkin:build",
 						"compodoc": true,
 						"compodocArgs": ["-e", "json", "-d", "."],
 						"outputDir": "storybook-static"
