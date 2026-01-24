@@ -1,5 +1,5 @@
 {
-	"name": "checkin",
+	"name": "orb",
 	"version": "0.0.0",
 	"scripts": {
 		"ng": "ng",
@@ -8,8 +8,8 @@
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"prepare": "husky",
-		"storybook": "ng run checkin:storybook",
-		"build-storybook": "ng run checkin:build-storybook"
+		"storybook": "ng run orb:storybook",
+		"build-storybook": "ng run orb:build-storybook"
 	},
 	"prettier": {
 		"printWidth": 100,
