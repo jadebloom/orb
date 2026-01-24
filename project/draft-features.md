@@ -2,10 +2,28 @@
 
 ## Core
 
-1. Dummy authentication (ex: bitwarden).
+1. Dummy authentication (ex: bitwarden, flag credentials).
 2. Dark mode.
 3. Different color modes.
-4. Database should be convertable to an accessible dump.
+4. Integration with Electron.
+5. Feature flags to support web version with no persistence.
+
+## Nomad
+
+1. Migrating the local database to a remote one or making an accessible dump from it.
+
+## Ravens
+
+1. A utility tool that is used to write blogs to several places at the same time?
+
+## Bacteria
+
+1. A utility tool to delete unnecessary email letters?
+
+## Diary
+
+1. Daily diary on other languages?
+2. Spell checking through 3rd party API?
 
 ## Activity Domain CRUD
 
@@ -22,12 +40,3 @@
 
 1. Goals can be defined with incremental progress.
 2. Progress steps are defined as well.
-
-## Daily Diary
-
-1. Daily diary on other languages?
-2. Spell checking through 3rd party API?
-
-## Email Utilities
-
-1. Bacteria integration?
