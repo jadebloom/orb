@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { PublicTopbar } from '@core/layout/components/public-topbar/public-topbar';
 
 @Component({
 	selector: 'app-root',
-	template: '<p class="text-red-400">App</p>',
+	template: '<orb-public-topbar />',
+	imports: [PublicTopbar],
 })
 export class App {}

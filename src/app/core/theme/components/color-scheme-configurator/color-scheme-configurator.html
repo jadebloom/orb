@@ -1,0 +1,56 @@
+<div class="relative">
+	<p-button
+		type="button"
+		icon="pi pi-palette"
+		pStyleClass="@next"
+		enterFromClass="hidden"
+		enterActiveClass="animate-scalein"
+		leaveToClass="hidden"
+		leaveActiveClass="animate-fadeout"
+		[hideOnOutsideClick]="true"
+		text
+		rounded
+		aria-label="Configure color scheme"
+	/>
+
+	<div
+		class="top-10 right-2 absolute shadow p-2 border border-surface-200 dark:border-surface-700 rounded-md w-52"
+	>
+		<div class="space-y-2 mb-4">
+			<p class="font-medium text-surface-500 dark:text-surface-400 text-xs">Primary</p>
+
+			<div class="flex flex-wrap gap-2">
+				@for (color of colorSchemeService.primaryColors; track $index) {
+					<button
+						type="button"
+						class="rounded-full size-4 cursor-pointer"
+						[class]="isSelectedPrimaryColor(color) ? 'outline-2' : 'outline-0'"
+						[style.backgroundColor]="isNoir(color) ? 'var(--p-gray-400)' : `var(--p-${color}-400)`"
+						(click)="colorSchemeService.updatePrimaryColor(color)"
+						[ariaLabel]="'Choose ' + color"
+					></button>
+				}
+			</div>
+		</div>
+
+		<div class="space-y-2">
+			<p class="font-medium text-surface-500 dark:text-surface-400 text-xs">Surface</p>
+
+			<div class="flex flex-wrap gap-2">
+				@for (color of colorSchemeService.surfaceColors; track $index) {
+					<button
+						type="button"
+						class="bg-red-400 rounded-full size-4 cursor-pointer"
+						[class]="isSelectedSurfaceColor(color) ? `outline-2` : 'outline-0'"
+						[style.backgroundColor]="`var(--p-${color}-400)`"
+						[pTooltip]="color"
+						tooltipPosition="top"
+						tooltipStyleClass="uppercase"
+						(click)="colorSchemeService.updateSurfaceColor(color)"
+						[ariaLabel]="'Choose ' + color"
+					></button>
+				}
+			</div>
+		</div>
+	</div>
+</div>
