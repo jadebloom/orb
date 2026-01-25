@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @import 'tailwindcss-primeui';
-@custom-variant dark (&:where(.gb-app-dark, .gb-app-dark *));
+@custom-variant dark (&:where(.orb-dark-mode, .orb-dark-mode *));
 
 @theme {
 	--breakpoint-sm: 640px;

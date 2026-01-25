@@ -1,0 +1,6 @@
+<p-button
+	text
+	rounded
+	[icon]="darkModeService.isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'"
+	(onClick)="darkModeService.toggleMode()"
+/>
