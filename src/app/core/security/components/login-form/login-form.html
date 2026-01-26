@@ -1,0 +1,19 @@
+<form
+	[formGroup]="formService.form"
+	autocomplete="off"
+	class="flex flex-col gap-4"
+	(ngSubmit)="login()"
+>
+	<orb-password-input [fc]="password()" />
+
+	<p-button
+		label="Unlock"
+		type="submit"
+		[loading]="formService.isLogining()"
+		[disabled]="formService.isLogining()"
+		[icon]="formService.isLogining() ? 'pi pi-lock' : 'pi pi-unlock'"
+		size="small"
+		rounded
+		fluid
+	/>
+</form>

@@ -1,9 +1,12 @@
 import { Routes } from '@angular/router';
-import { authGuard } from '@core/auth/guards/auth-guard';
+import { authGuard } from '@core/security/guards/auth/auth-guard';
 import { Layout } from '@core/layout/components/layout/layout';
-import { AuthenticationPage } from '@pages/authentication/authentication-page';
-import { NotFoundPage } from '@pages/not-found/not-found-page';
+import { RegistrationPage } from '@pages/registration/registration-page';
+import { LoginPage } from '@pages/login/login-page';
 import { HomePage } from '@pages/home-page';
+import { NotFoundPage } from '@pages/not-found/not-found-page';
+import { protectRegistrationGuardGuard } from '@core/security/guards/protect-registration/protect-registration-guard-guard';
+import { protectLoginGuardGuard } from '@core/security/guards/protect-login/protect-login-guard';
 
 export default [
 	{
@@ -19,13 +22,26 @@ export default [
 		],
 	},
 	{
-		path: 'authentication',
+		path: 'registration',
 		component: Layout,
+		canActivate: [protectRegistrationGuardGuard],
 		children: [
 			{
-				title: 'Orb. Authentication',
+				title: 'Orb. Registration',
 				path: '',
-				component: AuthenticationPage,
+				component: RegistrationPage,
+			},
+		],
+	},
+	{
+		path: 'login',
+		component: Layout,
+		canActivate: [protectLoginGuardGuard],
+		children: [
+			{
+				title: 'Orb. Login',
+				path: '',
+				component: LoginPage,
 			},
 		],
 	},

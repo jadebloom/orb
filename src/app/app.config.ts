@@ -31,7 +31,7 @@ export const appConfig: ApplicationConfig = {
 		provideAppInitializer(() => {
 			const startupService = inject(StartupService);
 
-			startupService.runOnStartup();
+			return startupService.runOnStartup();
 		}),
 	],
 };

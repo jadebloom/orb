@@ -1,0 +1,15 @@
+.rainbow-text {
+	@apply bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500 bg-clip-text text-transparent;
+	background-size: 200% 200%;
+	animation: rainbow 3s ease infinite;
+}
+
+@keyframes rainbow {
+	0%,
+	100% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+}

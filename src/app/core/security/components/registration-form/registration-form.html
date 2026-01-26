@@ -1,0 +1,21 @@
+<form
+	[formGroup]="formService.form"
+	autocomplete="off"
+	class="flex flex-col gap-4"
+	(ngSubmit)="register()"
+>
+	<orb-email-input [fc]="email()" />
+
+	<orb-password-input [fc]="password()" />
+
+	<p-button
+		label="Create"
+		type="submit"
+		[loading]="formService.isRegistrating()"
+		[disabled]="formService.isRegistrating()"
+		icon="pi pi-sparkles"
+		size="small"
+		rounded
+		fluid
+	/>
+</form>
