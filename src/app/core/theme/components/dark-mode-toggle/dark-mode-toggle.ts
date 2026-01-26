@@ -4,8 +4,8 @@ import { DarkModeService } from '@core/theme/services/dark-mode/dark-mode.servic
 
 @Component({
 	selector: 'orb-dark-mode-toggle',
-	templateUrl: './dark-mode-toggle.html',
 	imports: [ButtonModule],
+	templateUrl: './dark-mode-toggle.html',
 })
 export class DarkModeToggle {
 	protected readonly darkModeService = inject(DarkModeService);

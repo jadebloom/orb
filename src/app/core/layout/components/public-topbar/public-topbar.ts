@@ -4,7 +4,7 @@ import { ColorSchemeConfigurator } from '@core/theme/components/color-scheme-con
 
 @Component({
 	selector: 'orb-public-topbar',
-	templateUrl: './public-topbar.html',
 	imports: [DarkModeToggle, ColorSchemeConfigurator],
+	templateUrl: './public-topbar.html',
 })
 export class PublicTopbar {}

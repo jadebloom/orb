@@ -5,6 +5,7 @@ import {
 	provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { StartupService } from '@core/startup/services/startup-service/startup.service';
@@ -26,6 +27,7 @@ export const appConfig: ApplicationConfig = {
 				},
 			},
 		}),
+		MessageService,
 		provideAppInitializer(() => {
 			const startupService = inject(StartupService);
 

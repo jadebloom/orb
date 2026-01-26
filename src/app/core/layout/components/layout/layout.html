@@ -1,0 +1,15 @@
+@if (startupService.isStartupFinished()) {
+	<orb-global-toasts />
+
+	<div class="bg-white dark:bg-black">
+		<div class="flex flex-col mx-auto w-full lg:max-w-5xl min-h-screen">
+			<orb-public-topbar />
+
+			<router-outlet />
+		</div>
+	</div>
+} @else {
+	<div class="flex justify-center items-center bg-white dark:bg-black min-h-screen">
+		<orb-preloading />
+	</div>
+}

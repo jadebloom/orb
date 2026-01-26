@@ -14,7 +14,7 @@
 	/>
 
 	<div
-		class="hidden top-10 right-2 absolute shadow p-2 border border-surface-200 dark:border-surface-700 rounded-md w-52"
+		class="hidden top-10 right-2 z-50 absolute bg-white dark:bg-surface-800 shadow p-2 border border-surface-200 dark:border-surface-700 rounded-md w-52"
 	>
 		<div class="space-y-2 mb-4">
 			<p class="font-medium text-surface-500 dark:text-surface-400 text-xs">Primary</p>
@@ -23,6 +23,7 @@
 				@for (color of colorSchemeService.primaryColors; track $index) {
 					<button
 						type="button"
+						[title]="color"
 						class="rounded-full size-4 cursor-pointer"
 						[class]="isSelectedPrimaryColor(color) ? 'outline-2' : 'outline-0'"
 						[style.backgroundColor]="isNoir(color) ? 'var(--p-gray-400)' : `var(--p-${color}-400)`"
@@ -40,12 +41,10 @@
 				@for (color of colorSchemeService.surfaceColors; track $index) {
 					<button
 						type="button"
+						[title]="color"
 						class="bg-red-400 rounded-full size-4 cursor-pointer"
 						[class]="isSelectedSurfaceColor(color) ? `outline-2` : 'outline-0'"
 						[style.backgroundColor]="`var(--p-${color}-400)`"
-						[pTooltip]="color"
-						tooltipPosition="top"
-						tooltipStyleClass="uppercase"
 						(click)="colorSchemeService.updateSurfaceColor(color)"
 						[ariaLabel]="'Choose ' + color"
 					></button>

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { PublicTopbar } from '@core/layout/components/public-topbar/public-topbar';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
 	selector: 'app-root',
-	template: '<orb-public-topbar />',
-	imports: [PublicTopbar],
+	imports: [RouterOutlet],
+	template: '<router-outlet />',
 })
 export class App {}

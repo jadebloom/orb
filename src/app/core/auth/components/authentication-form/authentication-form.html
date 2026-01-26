@@ -1,0 +1,45 @@
+<form [formGroup]="formService.form" class="space-y-4 mx-auto max-w-md" (ngSubmit)="authenticate()">
+	<div class="space-y-2">
+		<p-floatlabel variant="on">
+			<label for="password">Enter the password</label>
+
+			<input
+				pInputText
+				formControlName="password"
+				type="password"
+				id="password"
+				autocomplete="off"
+				fluid
+			/>
+		</p-floatlabel>
+
+		@if (
+			(formService.form.get('password')?.touched || formService.form.get('password')?.dirty) &&
+			formService.form.get('password')?.hasError('required')
+		) {
+			<p-message severity="error" icon="pi pi-exclamation-circle" variant="simple" size="small">
+				Password is required.
+			</p-message>
+		}
+
+		@if (
+			(formService.form.get('password')?.touched || formService.form.get('password')?.dirty) &&
+			formService.form.get('password')?.hasError('maxlength')
+		) {
+			<p-message severity="error" icon="pi pi-exclamation-circle" variant="simple" size="small">
+				Password should contain at most 64 characters.
+			</p-message>
+		}
+	</div>
+
+	<p-button
+		label="Unlock"
+		type="submit"
+		[loading]="formService.isAuthenticating()"
+		[disabled]="formService.isAuthenticating()"
+		[icon]="formService.isAuthenticating() ? 'pi pi-lock' : 'pi pi-unlock'"
+		size="small"
+		rounded
+		fluid
+	/>
+</form>
