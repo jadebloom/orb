@@ -10,40 +10,55 @@ export class DarkModeService {
 	readonly isDarkMode = this._isDarkMode.asReadonly();
 
 	loadMode() {
-		const mql = window.matchMedia('(prefers-color-scheme: dark)');
+		const isDarkModeLs = localStorage.getItem('isDarkMode');
 
-		if (mql.matches) this.setDarkMode();
-		else this.setLightMode();
+		if (isDarkModeLs == null) {
+			const mql = window.matchMedia('(prefers-color-scheme: dark)');
 
-		const system$ = fromEventPattern<MediaQueryList>(
-			(handler) => mql.addEventListener('change', handler),
-			(handler) => mql.removeEventListener('change', handler),
-		).pipe(
-			takeUntilDestroyed(this.destroyRef),
-			map((e) => e.matches),
-		);
+			if (mql.matches) this.setDarkMode();
+			else this.setLightMode();
 
-		system$.subscribe({
-			next: (match) => {
-				if (match) this.setDarkMode();
-				else this.setLightMode();
-			},
-		});
+			const mql$ = fromEventPattern<MediaQueryList>(
+				(handler) => mql.addEventListener('change', handler),
+				(handler) => mql.removeEventListener('change', handler),
+			).pipe(
+				takeUntilDestroyed(this.destroyRef),
+				map((e) => e.matches),
+			);
+			mql$.subscribe({
+				next: (match) => {
+					if (match) this.setDarkMode();
+					else this.setLightMode();
+				},
+			});
+		}
+
+		if (isDarkModeLs == 'true') {
+			this.setDarkMode();
+		} else if (isDarkModeLs == 'false') {
+			this.setLightMode();
+		}
 	}
 
 	setDarkMode() {
 		this._isDarkMode.set(true);
 
 		document.querySelector('html')?.classList.add('orb-dark-mode');
+
+		localStorage.setItem('isDarkMode', 'true');
 	}
 
 	setLightMode() {
 		this._isDarkMode.set(false);
 
 		document.querySelector('html')?.classList.remove('orb-dark-mode');
+
+		localStorage.setItem('isDarkMode', 'false');
 	}
 
 	toggleMode() {
+		localStorage.setItem('isDarkMode', this._isDarkMode() ? 'false' : 'true');
+
 		this._isDarkMode.update((p) => !p);
 
 		document.querySelector('html')?.classList.toggle('orb-dark-mode');

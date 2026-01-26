@@ -42,13 +42,30 @@ export class ColorSchemeService {
 	updatePrimaryColor(color: PrimaryColorScheme) {
 		this._selectedPrimaryColor.set(color);
 
+		localStorage.setItem('primaryColor', color);
+
 		updatePreset(this.getPrimaryColorPreset());
 	}
 
 	updateSurfaceColor(color: SurfaceColorScheme) {
 		this._selectedSurfaceColor.set(color);
 
+		localStorage.setItem('surfaceColor', color);
+
 		updateSurfacePalette(this.getSurfaceColorTokens());
+	}
+
+	loadPreferences() {
+		const primaryColor = localStorage.getItem('primaryColor');
+		const surfaceColor = localStorage.getItem('surfaceColor');
+
+		if (this.primaryColors.includes(primaryColor as PrimaryColorScheme)) {
+			this.updatePrimaryColor(primaryColor as PrimaryColorScheme);
+		}
+
+		if (this.surfaceColors.includes(surfaceColor as SurfaceColorScheme)) {
+			this.updateSurfaceColor(surfaceColor as SurfaceColorScheme);
+		}
 	}
 
 	private getPrimaryColorPreset() {
