@@ -2,3 +2,7 @@
 @use 'primeicons/primeicons.css';
 @use './_utils.scss';
 @use './_animations.scss';
+
+* {
+	font-family: 'Lato', sans-serif;
+}
