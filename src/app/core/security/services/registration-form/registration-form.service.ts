@@ -24,7 +24,11 @@ export class RegistrationFormService {
 	readonly isRegistrating = signal(false);
 
 	register(): Observable<User> {
-		if (this.form.invalid || this.isRegistrating()) return EMPTY;
+		if (this.form.invalid || this.isRegistrating()) {
+			this.form.markAllAsTouched();
+
+			return EMPTY;
+		}
 
 		this.isRegistrating.set(true);
 		this.form.disable();

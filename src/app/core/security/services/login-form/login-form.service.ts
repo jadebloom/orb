@@ -20,7 +20,11 @@ export class LoginFormService {
 	readonly isLogining = signal(false);
 
 	login(): Observable<User> {
-		if (this.form.invalid || this.isLogining()) return EMPTY;
+		if (this.form.invalid || this.isLogining()) {
+			this.form.markAllAsTouched();
+
+			return EMPTY;
+		}
 
 		this.isLogining.set(true);
 		this.form.disable();
