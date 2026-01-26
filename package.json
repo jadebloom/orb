@@ -40,7 +40,6 @@
 		"@angular/platform-browser": "^21.1.0",
 		"@angular/router": "^21.1.0",
 		"@primeuix/themes": "^2.0.3",
-		"crypto-js": "^4.2.0",
 		"dexie": "^4.2.1",
 		"primeicons": "^7.0.0",
 		"primeng": "^21.0.4",
