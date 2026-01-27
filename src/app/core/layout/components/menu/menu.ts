@@ -39,6 +39,11 @@ export class Menu {
 			sectionName: 'Account',
 			items: [
 				{
+					label: 'Your account',
+					icon: 'pi pi-user',
+					action: () => this.router.navigate(['/account']),
+				},
+				{
 					label: 'Delete account',
 					icon: 'pi pi-trash',
 					class: 'hover:text-red-400',

@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
-import { authGuard } from '@core/security/guards/auth/auth-guard';
 import { Layout } from '@core/layout/components/layout/layout';
+import { authGuard } from '@core/security/guards/auth/auth-guard';
+import { protectRegistrationGuardGuard } from '@core/security/guards/protect-registration/protect-registration-guard-guard';
+import { protectLoginGuardGuard } from '@core/security/guards/protect-login/protect-login-guard';
 import { RegistrationPage } from '@pages/registration/registration-page';
 import { LoginPage } from '@pages/login/login-page';
 import { HomePage } from '@pages/home-page';
 import { NotFoundPage } from '@pages/not-found/not-found-page';
-import { protectRegistrationGuardGuard } from '@core/security/guards/protect-registration/protect-registration-guard-guard';
-import { protectLoginGuardGuard } from '@core/security/guards/protect-login/protect-login-guard';
+import accountRoutes from '@pages/account/account.routes';
 
 export default [
 	{
@@ -21,6 +22,7 @@ export default [
 			},
 		],
 	},
+	...accountRoutes,
 	{
 		path: 'registration',
 		component: Layout,

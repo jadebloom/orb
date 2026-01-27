@@ -1,0 +1,15 @@
+@if (isFetchingError()) {
+	<div class="flex items-center gap-2">
+		<p>Account failed to fetch</p>
+
+		<p-button label="Refresh" icon="pi pi-refresh" size="small" rounded />
+	</div>
+} @else {
+	<form [formGroup]="formService.form" class="flex flex-col gap-4" (ngSubmit)="updateAccount()">
+		<orb-email-input [fc]="email()" />
+
+		<orb-password-input [fc]="password()" />
+
+		<p-button type="submit" label="Update" icon="pi pi-user-edit" size="small" rounded fluid />
+	</form>
+}
