@@ -8,4 +8,8 @@ export class AuthenticationService {
 	authenticate() {
 		this._isAuthenticated.set(true);
 	}
+
+	logout() {
+		this._isAuthenticated.set(false);
+	}
 }
