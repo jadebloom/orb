@@ -1,0 +1,13 @@
+<div
+	class="flex items-center gap-2 transition-all"
+	[class]="booleanStateService.state() ? 'pb-32' : 'pb-0'"
+>
+	<label for="color">Color: </label>
+
+	<p-colorpicker
+		id="color"
+		[formControl]="fc()"
+		(onShow)="booleanStateService.set(true)"
+		(onHide)="booleanStateService.set(false)"
+	/>
+</div>

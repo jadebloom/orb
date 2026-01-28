@@ -1,0 +1,16 @@
+<form [formGroup]="formService.form" class="flex flex-col gap-4 pt-1" (ngSubmit)="createDomain()">
+	<orb-domain-name-input [fc]="name()" />
+
+	<orb-domain-color-picker [fc]="color()" />
+
+	<p-button
+		type="submit"
+		label="Create"
+		icon="pi pi-plus"
+		size="small"
+		rounded
+		fluid
+		[loading]="formService.isCreating()"
+		[disabled]="formService.isCreating()"
+	/>
+</form>

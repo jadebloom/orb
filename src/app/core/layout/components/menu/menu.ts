@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -9,6 +9,7 @@ import { UserService } from '@core/database/services/user/user.service';
 import { AuthenticationService } from '@core/security/services/authentication/authentication.service';
 import { DEFAULT_ERROR_MESSAGE } from '@core/constants/messages';
 import { DeleteAccountService } from '@features/account/services/delete-account/delete-account.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 interface Section {
 	sectionName: string;
@@ -33,8 +34,19 @@ export class Menu {
 	private readonly authenticationService = inject(AuthenticationService);
 	private readonly userService = inject(UserService);
 	private readonly messageService = inject(MessageService);
+	private readonly destroyRef = inject(DestroyRef);
 
 	protected readonly sections: Section[] = [
+		{
+			sectionName: 'Domains',
+			items: [
+				{
+					label: 'Your domains',
+					icon: 'pi pi-box',
+					action: () => this.router.navigate(['/domains']),
+				},
+			],
+		},
 		{
 			sectionName: 'Account',
 			items: [
@@ -87,22 +99,25 @@ export class Menu {
 				severity: 'danger',
 			},
 			accept: () => {
-				this.deleteAccountService.deleteAccount().subscribe({
-					next: () => {
-						this.authenticationService.logout();
-						this.userService.doesUserExist.set(false);
+				this.deleteAccountService
+					.deleteAccount()
+					.pipe(takeUntilDestroyed(this.destroyRef))
+					.subscribe({
+						next: () => {
+							this.authenticationService.logout();
+							this.userService.doesUserExist.set(false);
 
-						this.router.navigate(['/registration']);
-					},
-					error: (err) => {
-						this.messageService.add({
-							key: 'main',
-							severity: 'error',
-							summary: 'Deletion Failure',
-							detail: err?.message ?? DEFAULT_ERROR_MESSAGE,
-						});
-					},
-				});
+							this.router.navigate(['/registration']);
+						},
+						error: (err) => {
+							this.messageService.add({
+								key: 'main',
+								severity: 'error',
+								summary: 'Deletion Failure',
+								detail: err?.message ?? DEFAULT_ERROR_MESSAGE,
+							});
+						},
+					});
 			},
 		});
 	}

@@ -4,15 +4,15 @@ import { authGuard } from '@core/security/guards/auth/auth-guard';
 
 export default [
 	{
-		path: 'account',
+		path: 'domains',
 		component: Layout,
 		canActivateChild: [authGuard],
 		children: [
 			{
-				title: 'Orb. Your account',
+				title: 'Orb. Your domains',
 				path: '',
 				loadComponent: () =>
-					import('src/app/pages/account/account-page').then((m) => m.AccountPage),
+					import('src/app/pages/domains/domains-page').then((m) => m.DomainsPage),
 			},
 		],
 	},

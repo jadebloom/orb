@@ -1,0 +1,18 @@
+<main>
+	<header class="flex justify-between items-center gap-1">
+		<p>Your domains</p>
+
+		<div class="flex items-center gap-1">
+			<p-button label="New" icon="pi pi-plus" size="small" rounded (onClick)="createDomain()" />
+
+			<p-button
+				label="Delete All"
+				icon="pi pi-trash"
+				severity="danger"
+				size="small"
+				rounded
+				(onClick)="deleteAllDomains()"
+			/>
+		</div>
+	</header>
+</main>

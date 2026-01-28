@@ -8,6 +8,7 @@ import { LoginPage } from '@pages/login/login-page';
 import { HomePage } from '@pages/home-page';
 import { NotFoundPage } from '@pages/not-found/not-found-page';
 import accountRoutes from '@pages/account/account.routes';
+import domainsRoutes from '@pages/domains/domains.routes';
 
 export default [
 	{
@@ -23,6 +24,7 @@ export default [
 		],
 	},
 	...accountRoutes,
+	...domainsRoutes,
 	{
 		path: 'registration',
 		component: Layout,
