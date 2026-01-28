@@ -14,6 +14,12 @@ export default [
 				loadComponent: () =>
 					import('src/app/pages/domains/domains-page').then((m) => m.DomainsPage),
 			},
+			{
+				title: 'Orb. Your domain',
+				path: ':id',
+				loadComponent: () =>
+					import('src/app/pages/domains/:id/domain-page/domain-page').then((m) => m.DomainPage),
+			},
 		],
 	},
 ] as Routes;

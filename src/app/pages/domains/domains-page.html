@@ -1,7 +1,7 @@
 <main>
-	<header class="sm:flex justify-between items-center gap-1 space-y-2 sm:space-y-0 mb-8">
-		<p class="text-lg">Your domains</p>
-
+	<header
+		class="sm:flex flex-row-reverse justify-between items-center gap-1 space-y-2 sm:space-y-0 mb-8"
+	>
 		<div class="flex items-center gap-1">
 			<p-button
 				label="Refresh"
@@ -24,11 +24,13 @@
 				(onClick)="deleteAllDomains()"
 			/>
 		</div>
+
+		<p class="text-lg">Your domains</p>
 	</header>
 
 	@if (domains().length) {
 		@for (domain of domains(); track $index) {
-			<orb-domain-preview [domain]="domain" />
+			<orb-domain-preview [domain]="domain" (deleted)="fetchAllDomains()" />
 		}
 	} @else {
 		<p>No domains were found. Please try again or make sure your have created.</p>

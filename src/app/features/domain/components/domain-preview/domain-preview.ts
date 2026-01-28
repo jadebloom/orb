@@ -1,28 +1,24 @@
-import { Component, DestroyRef, inject, input, output, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs';
-import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { DEFAULT_ERROR_MESSAGE } from '@core/constants/messages';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Domain } from '@core/database/models/domain';
-import { DeleteDomainService } from '@features/domain/services/delete-domain/delete-domain.service';
-import { DomainBusService } from '@features/domain/services/domain-bus/domain-bus.service';
+import { DeleteDomainDialog } from '@features/domain/components/delete-domain-dialog/delete-domain-dialog';
 
 @Component({
 	selector: 'orb-domain-preview',
 	imports: [ButtonModule],
 	templateUrl: './domain-preview.html',
+	providers: [DialogService],
 })
 export class DomainPreview {
-	private readonly domainBusService = inject(DomainBusService);
-	private readonly deleteDomainService = inject(DeleteDomainService);
 	private readonly router = inject(Router);
-	private readonly messageService = inject(MessageService);
-	private readonly destroyRef = inject(DestroyRef);
+	private readonly dialogService = inject(DialogService);
 
 	domain = input.required<Domain>();
 	deleted = output<void>();
+
+	ref?: DynamicDialogRef<DeleteDomainDialog> | null;
 
 	protected readonly isDeleting = signal(false);
 	protected readonly isDeleted = signal(false);
@@ -31,43 +27,30 @@ export class DomainPreview {
 		event.stopImmediatePropagation();
 		event.preventDefault();
 
-		this.router.navigate(['/domains', `${this.domain().id}`]);
+		this.router.navigate(['/domains', this.domain().id]);
 	}
 
 	protected deleteDomain(event: Event) {
 		event.stopImmediatePropagation();
 		event.preventDefault();
 
-		if (this.isDeleting() || this.isDeleted()) return;
+		this.ref = this.dialogService.open(DeleteDomainDialog, {
+			header: 'Delete your domain',
+			inputValues: { domain: this.domain() },
+			width: '50vw',
+			modal: true,
+			closable: true,
+			closeOnEscape: true,
+			breakpoints: {
+				'960px': '75vw',
+				'640px': '90vw',
+			},
+		});
 
-		const domainId = this.domain().id;
-
-		if (typeof domainId !== 'number' || Number.isNaN(domainId)) return;
-
-		this.isDeleting.set(true);
-
-		this.deleteDomainService
-			.deleteDomainById(domainId)
-			.pipe(
-				takeUntilDestroyed(this.destroyRef),
-				finalize(() => this.isDeleting.set(false)),
-			)
-			.subscribe({
-				next: () => {
-					this.domainBusService.triggerFetchAllDomains();
-
-					this.isDeleted.set(true);
-
-					this.deleted.emit();
-				},
-				error: (err) => {
-					this.messageService.add({
-						key: 'main',
-						severity: 'error',
-						summary: 'Deleting Failure',
-						detail: err?.message ?? DEFAULT_ERROR_MESSAGE,
-					});
-				},
-			});
+		this.ref?.onClose.subscribe((isDeleted: unknown) => {
+			if (typeof isDeleted === 'boolean' && isDeleted) {
+				this.deleted.emit();
+			}
+		});
 	}
 }

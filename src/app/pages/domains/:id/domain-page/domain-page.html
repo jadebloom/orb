@@ -1,0 +1,34 @@
+@let d = domain();
+
+@if (d) {
+	<div class="sm:flex flex-row-reverse justify-between items-center gap-2">
+		<div class="sm:flex sm:items-center gap-2 grid grid-cols-1">
+			<p-button label="Update domain" icon="pi pi-pencil" size="small" fluid rounded />
+
+			<p-button
+				label="Delete domain"
+				icon="pi pi-trash"
+				size="small"
+				fluid
+				severity="danger"
+				rounded
+				(onClick)="deleteDomain()"
+			/>
+		</div>
+
+		<p class="mt-4 sm:mt-0 text-lg">{{ d.name }}</p>
+	</div>
+} @else {
+	<p class="mb-2">No domain was found. Please try again or verify its existence.</p>
+
+	<p-button
+		label="Refresh"
+		icon="pi pi-refresh"
+		size="small"
+		rounded
+		class="flex justify-end"
+		[loading]="isFetchingDomain()"
+		[disabled]="isFetchingDomain()"
+		(onClick)="fetchDomainById()"
+	/>
+}

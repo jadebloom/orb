@@ -44,32 +44,6 @@ export class DomainsPage implements OnInit {
 		});
 	}
 
-	protected createDomain() {
-		this.ref1 = this.dialogService.open(CreateDomainForm, {
-			header: 'Create new domain',
-			width: '50vw',
-			modal: true,
-			closable: true,
-			breakpoints: {
-				'960px': '75vw',
-				'640px': '90vw',
-			},
-		});
-	}
-
-	protected deleteAllDomains() {
-		this.ref2 = this.dialogService.open(DeleteAllDomainsDialog, {
-			header: 'Delete your all domains',
-			width: '50vw',
-			modal: true,
-			closable: true,
-			breakpoints: {
-				'960px': '75vw',
-				'640px': '90vw',
-			},
-		});
-	}
-
 	protected fetchAllDomains() {
 		this.fetchAllDomainsService
 			.fetchAllDomains()
@@ -90,5 +64,32 @@ export class DomainsPage implements OnInit {
 					});
 				},
 			});
+	}
+
+	protected createDomain() {
+		this.ref1 = this.dialogService.open(CreateDomainForm, {
+			header: 'Create new domain',
+			width: '50vw',
+			modal: true,
+			closable: true,
+			closeOnEscape: true,
+			breakpoints: {
+				'960px': '75vw',
+				'640px': '90vw',
+			},
+		});
+	}
+
+	protected deleteAllDomains() {
+		this.ref2 = this.dialogService.open(DeleteAllDomainsDialog, {
+			header: 'Delete your all domains',
+			width: '50vw',
+			modal: true,
+			closable: true,
+			breakpoints: {
+				'960px': '75vw',
+				'640px': '90vw',
+			},
+		});
 	}
 }
