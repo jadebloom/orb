@@ -9,9 +9,19 @@ export class UserService {
 	readonly doesUserExist = signal(false);
 
 	async createUser(payload: CreateUserPayload): Promise<User> {
-		await database.user.add({ email: payload.email, password: payload.password });
+		const doesUserExist = await this.doesUserExistInDatabase();
 
-		return { email: payload.email, password: payload.password };
+		if (doesUserExist) {
+			throw new Error('A registered user already exists!');
+		}
+
+		await database.user.add({
+			email: payload.email,
+			password: payload.password,
+			lastLoggedIn: new Date(),
+		});
+
+		return this.fetchUser();
 	}
 
 	async fetchUser(): Promise<User> {
@@ -45,5 +55,11 @@ export class UserService {
 			.modify({ email: payload.email, password: payload.password });
 
 		return { email: payload.email, password: payload.password } as User;
+	}
+
+	async updateLastLoggedIn() {
+		const user = await this.fetchUser();
+
+		database.user.where('email').equals(user.email).modify({ lastLoggedIn: new Date() });
 	}
 }
