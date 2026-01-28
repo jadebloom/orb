@@ -7,6 +7,7 @@ import { DEFAULT_ERROR_MESSAGE } from '@core/constants/messages';
 import { CreateDomainFormService } from '@features/domain/services/create-domain-form/create-domain-form.service';
 import { DomainNameInput } from '@features/domain/components/domain-name-input/domain-name-input';
 import { DomainColorPicker } from '@features/domain/components/domain-color-picker/domain-color-picker';
+import { DomainBusService } from '@features/domain/services/domain-bus/domain-bus.service';
 
 @Component({
 	selector: 'orb-create-domain-form',
@@ -15,6 +16,7 @@ import { DomainColorPicker } from '@features/domain/components/domain-color-pick
 })
 export class CreateDomainForm {
 	protected readonly formService = inject(CreateDomainFormService);
+	private readonly domainBusService = inject(DomainBusService);
 	private readonly messageService = inject(MessageService);
 	private readonly destroyRef = inject(DestroyRef);
 
@@ -32,6 +34,8 @@ export class CreateDomainForm {
 			.pipe(takeUntilDestroyed(this.destroyRef))
 			.subscribe({
 				next: () => {
+					this.domainBusService.triggerFetchAllDomains();
+
 					this.messageService.add({
 						key: 'main',
 						severity: 'success',

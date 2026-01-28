@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DEFAULT_ERROR_MESSAGE } from '@core/constants/messages';
 import { DeleteAllDomainsService } from '@features/domain/services/delete-all-domains/delete-all-domains.service';
+import { DomainBusService } from '@features/domain/services/domain-bus/domain-bus.service';
 
 @Component({
 	selector: 'orb-delete-all-domains-dialog',
@@ -14,6 +15,7 @@ import { DeleteAllDomainsService } from '@features/domain/services/delete-all-do
 })
 export class DeleteAllDomainsDialog {
 	protected readonly deleteAllDomainsService = inject(DeleteAllDomainsService);
+	private readonly domainBusService = inject(DomainBusService);
 	private readonly messageService = inject(MessageService);
 	private readonly dialogRef = inject(DynamicDialogRef);
 	private readonly destroyRef = inject(DestroyRef);
@@ -33,6 +35,8 @@ export class DeleteAllDomainsDialog {
 			)
 			.subscribe({
 				next: () => {
+					this.domainBusService.triggerFetchAllDomains();
+
 					this.messageService.add({
 						key: 'main',
 						severity: 'success',

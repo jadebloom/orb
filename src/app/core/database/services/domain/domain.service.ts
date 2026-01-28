@@ -12,10 +12,14 @@ export class DomainService {
 			createdAt: new Date(),
 		});
 
-		return this.fetchDomain(domainId);
+		return this.fetchDomainById(domainId);
 	}
 
-	async fetchDomain(domainId: number): Promise<Domain> {
+	async fetchAllDomains(): Promise<Domain[]> {
+		return await database.domains.toArray();
+	}
+
+	async fetchDomainById(domainId: number): Promise<Domain> {
 		const domain = await database.domains.where('id').equals(domainId).first();
 
 		if (domain == null) throw new Error(`Domain with ID ${domainId} wasn't found`);
@@ -25,5 +29,9 @@ export class DomainService {
 
 	async deleteAllDomains(): Promise<void> {
 		await database.domains.clear();
+	}
+
+	async deleteDomainById(domainId: number): Promise<void> {
+		await database.domains.delete(domainId);
 	}
 }

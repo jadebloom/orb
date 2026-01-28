@@ -1,0 +1,29 @@
+@if (!isDeleted()) {
+	<div class="flex justify-between items-center gap-1 cursor-pointer">
+		<div class="flex items-center gap-2 min-w-0">
+			<span
+				class="block rounded-full size-4 shrink-0"
+				[style]="{ 'background-color': domain().color }"
+			></span>
+
+			<p class="truncate">
+				{{ domain().name }}
+			</p>
+		</div>
+
+		<div class="flex items-center gap-2 shrink-0">
+			<p-button icon="pi pi-eye" size="small" text rounded (onClick)="viewDomain($event)" />
+
+			<p-button
+				icon="pi pi-trash"
+				text
+				severity="danger"
+				size="small"
+				rounded
+				[loading]="isDeleting()"
+				[disabled]="isDeleting() || isDeleted()"
+				(onClick)="deleteDomain($event)"
+			/>
+		</div>
+	</div>
+}
