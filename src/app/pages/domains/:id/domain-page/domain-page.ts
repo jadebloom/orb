@@ -9,6 +9,7 @@ import { DEFAULT_ERROR_MESSAGE } from '@core/constants/messages';
 import { Domain } from '@core/database/models/domain';
 import { FetchDomainService } from '@features/domain/services/fetch-domain/fetch-domain.service';
 import { DeleteDomainDialog } from '@features/domain/components/delete-domain-dialog/delete-domain-dialog';
+import { UpdateDomainDialog } from '@features/domain/components/update-domain-dialog/update-domain-dialog';
 
 @Component({
 	selector: 'orb-domain-page',
@@ -27,6 +28,7 @@ export class DomainPage implements OnInit {
 	private readonly dialogService = inject(DialogService);
 	private readonly destroyRef = inject(DestroyRef);
 
+	ref1?: DynamicDialogRef | null;
 	ref2?: DynamicDialogRef | null;
 
 	protected readonly domainId = signal<number | null>(null);
@@ -70,6 +72,26 @@ export class DomainPage implements OnInit {
 					});
 				},
 			});
+	}
+
+	protected updateDomain() {
+		this.ref1 = this.dialogService.open(UpdateDomainDialog, {
+			header: 'Update your domain',
+			inputValues: { domain: this.domain() },
+			width: '50vw',
+			modal: true,
+			closable: true,
+			breakpoints: {
+				'960px': '75vw',
+				'640px': '90vw',
+			},
+		});
+
+		this.ref1?.onClose.subscribe((isUpdated) => {
+			if (typeof isUpdated === 'boolean' && isUpdated) {
+				this.fetchDomainById();
+			}
+		});
 	}
 
 	protected deleteDomain() {

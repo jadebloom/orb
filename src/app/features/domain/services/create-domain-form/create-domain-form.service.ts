@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EMPTY, finalize, Observable } from 'rxjs';
+import { EMPTY, finalize, map, Observable } from 'rxjs';
 import { CreateDomainService } from '@features/domain/services/create-domain/create-domain.service';
 import { hexColorCodeValidator } from '@features/domain/validators/hex-color.validator';
 import { Domain } from '@core/database/models/domain';
@@ -42,6 +42,11 @@ export class CreateDomainFormService {
 				color: body.color,
 			})
 			.pipe(
+				map((domain) => {
+					this.form.reset();
+
+					return domain;
+				}),
 				finalize(() => {
 					this.isCreating.set(false);
 					this.form.enable();

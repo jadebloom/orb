@@ -3,7 +3,14 @@
 @if (d) {
 	<div class="sm:flex flex-row-reverse justify-between items-center gap-2">
 		<div class="sm:flex sm:items-center gap-2 grid grid-cols-1">
-			<p-button label="Update domain" icon="pi pi-pencil" size="small" fluid rounded />
+			<p-button
+				label="Update domain"
+				icon="pi pi-pencil"
+				size="small"
+				fluid
+				rounded
+				(onClick)="updateDomain()"
+			/>
 
 			<p-button
 				label="Delete domain"

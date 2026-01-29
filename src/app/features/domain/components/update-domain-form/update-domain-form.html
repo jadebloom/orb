@@ -1,0 +1,16 @@
+<form [formGroup]="formService.form" class="flex flex-col gap-4 pt-1" (ngSubmit)="updateDomain()">
+	<orb-domain-name-input [fc]="name()" />
+
+	<orb-domain-color-picker [fc]="color()" />
+
+	<p-button
+		type="submit"
+		label="Update"
+		icon="pi pi-pencil"
+		size="small"
+		rounded
+		fluid
+		[loading]="formService.isUpdating()"
+		[disabled]="formService.isUpdating()"
+	/>
+</form>

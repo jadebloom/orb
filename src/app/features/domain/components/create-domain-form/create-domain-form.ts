@@ -42,8 +42,6 @@ export class CreateDomainForm {
 						summary: 'Creation Success',
 						detail: 'Successfully created your new domain!',
 					});
-
-					this.formService.form.reset();
 				},
 				error: (err) => {
 					this.messageService.add({
