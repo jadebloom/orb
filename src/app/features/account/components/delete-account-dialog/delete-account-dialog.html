@@ -1,8 +1,6 @@
 @if (!isDeleted()) {
 	<div>
-		<p class="mb-2">
-			Are you sure you want to delete domain <span class="font-medium">{{ domain().name }}?</span>
-		</p>
+		<p class="mb-2">Are you sure you want to delete your account?</p>
 
 		<p-button
 			label="Delete"
@@ -13,7 +11,7 @@
 			class="flex justify-end"
 			[loading]="isDeleting()"
 			[disabled]="isDeleting() || isDeleted()"
-			(onClick)="deleteDomain()"
+			(onClick)="deleteAccount()"
 		/>
 	</div>
 }

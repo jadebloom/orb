@@ -4,6 +4,15 @@
 	<div class="sm:flex flex-row-reverse justify-between items-center gap-2">
 		<div class="sm:flex sm:items-center gap-2 grid grid-cols-1">
 			<p-button
+				label="Manage goals"
+				icon="pi pi-calendar"
+				size="small"
+				fluid
+				rounded
+				(onClick)="router.navigate(['/domains', d.id, 'goals'])"
+			/>
+
+			<p-button
 				label="Update domain"
 				icon="pi pi-pencil"
 				size="small"

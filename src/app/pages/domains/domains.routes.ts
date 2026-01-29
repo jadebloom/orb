@@ -15,10 +15,21 @@ export default [
 					import('src/app/pages/domains/domains-page').then((m) => m.DomainsPage),
 			},
 			{
-				title: 'Orb. Your domain',
 				path: ':id',
-				loadComponent: () =>
-					import('src/app/pages/domains/:id/domain-page/domain-page').then((m) => m.DomainPage),
+				children: [
+					{
+						title: 'Orb. Your domain',
+						path: '',
+						loadComponent: () =>
+							import('src/app/pages/domains/:id/domain-page').then((m) => m.DomainPage),
+					},
+					{
+						title: 'Orb. Domain goals',
+						path: 'goals',
+						loadComponent: () =>
+							import('@pages/domains/:id/goals/domain-goals-page').then((m) => m.DomainGoalsPage),
+					},
+				],
 			},
 		],
 	},

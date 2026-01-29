@@ -1,123 +1,75 @@
-import { Component, DestroyRef, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { Component, inject } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { StyleClass } from 'primeng/styleclass';
-import { DividerModule } from 'primeng/divider';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { UserService } from '@core/database/services/user/user.service';
-import { AuthenticationService } from '@core/security/services/authentication/authentication.service';
-import { DEFAULT_ERROR_MESSAGE } from '@core/constants/messages';
-import { DeleteAccountService } from '@features/account/services/delete-account/delete-account.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
-interface Section {
-	sectionName: string;
-	items: {
-		label: string;
-		icon: string;
-		class?: string;
-		action: (e: Event) => unknown;
-	}[];
-}
+import { MenuModule } from 'primeng/menu';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DeleteAccountDialog } from '@features/account/components/delete-account-dialog/delete-account-dialog';
 
 @Component({
 	selector: 'orb-menu',
-	imports: [ButtonModule, StyleClass, DividerModule, ConfirmDialogModule],
+	imports: [ButtonModule, MenuModule],
 	templateUrl: './menu.html',
-	providers: [ConfirmationService],
+	providers: [DialogService],
 })
 export class Menu {
-	private readonly deleteAccountService = inject(DeleteAccountService);
-	private readonly confirmationService = inject(ConfirmationService);
-	private readonly router = inject(Router);
-	private readonly authenticationService = inject(AuthenticationService);
-	private readonly userService = inject(UserService);
-	private readonly messageService = inject(MessageService);
-	private readonly destroyRef = inject(DestroyRef);
+	private readonly dialogService = inject(DialogService);
 
-	protected readonly sections: Section[] = [
+	private ref?: DynamicDialogRef<DeleteAccountDialog> | null;
+
+	protected readonly items: MenuItem[] = [
 		{
-			sectionName: 'Domains',
+			label: 'Domains',
 			items: [
 				{
 					label: 'Your domains',
 					icon: 'pi pi-box',
-					action: () => this.router.navigate(['/domains']),
+					routerLink: '/domains',
 				},
 			],
 		},
 		{
-			sectionName: 'Account',
+			label: 'Account',
 			items: [
 				{
 					label: 'Your account',
 					icon: 'pi pi-user',
-					action: () => this.router.navigate(['/account']),
+					routerLink: '/account',
 				},
 				{
 					label: 'Delete account',
 					icon: 'pi pi-trash',
 					class: 'hover:text-red-400',
-					action: (e: Event) => this.deleteAccount(e),
+					command: () => this.deleteAccount(),
 				},
 			],
 		},
 		{
-			sectionName: 'Source',
+			label: 'Source',
 			items: [
 				{
-					label: 'View documentation',
+					label: 'Documentation',
 					icon: 'pi pi-github',
-					action: () =>
-						window.open('https://github.com/jadebloom/orb', '_blank', 'noopener,noreferrer'),
+					url: 'https://github.com/jadebloom/orb',
 				},
 				{
 					label: 'See author',
 					icon: 'pi pi-github',
-					action: () =>
-						window.open('https://github.com/jadebloom', '_blank', 'noopener,noreferrer'),
+					url: 'https://github.com/jadebloom',
 				},
 			],
 		},
 	];
 
-	protected deleteAccount(event: Event) {
-		this.confirmationService.confirm({
-			target: event.target as EventTarget,
-			message: 'Do you want to delete your account?',
-			header: 'Danger Zone',
-			icon: 'pi pi-info-circle',
-			rejectLabel: 'Cancel',
-			rejectButtonProps: {
-				label: 'Cancel',
-				severity: 'secondary',
-				outlined: true,
-			},
-			acceptButtonProps: {
-				label: 'Delete',
-				severity: 'danger',
-			},
-			accept: () => {
-				this.deleteAccountService
-					.deleteAccount()
-					.pipe(takeUntilDestroyed(this.destroyRef))
-					.subscribe({
-						next: () => {
-							this.authenticationService.logout();
-							this.userService.doesUserExist.set(false);
-
-							this.router.navigate(['/registration']);
-						},
-						error: (err) => {
-							this.messageService.add({
-								key: 'main',
-								severity: 'error',
-								summary: 'Deletion Failure',
-								detail: err?.message ?? DEFAULT_ERROR_MESSAGE,
-							});
-						},
-					});
+	protected deleteAccount() {
+		this.dialogService.open(DeleteAccountDialog, {
+			header: 'Delete your account',
+			width: '50vw',
+			modal: true,
+			closable: true,
+			closeOnEscape: true,
+			breakpoints: {
+				'960px': '75vw',
+				'640px': '90vw',
 			},
 		});
 	}

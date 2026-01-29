@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { database } from '@core/database/db';
 
 @Injectable({ providedIn: 'root' })
-export class DeleteAllService {
-	async deleteAll(): Promise<void> {
+export class ClearDatabaseService {
+	async clearDatabase(): Promise<void> {
 		await database.user.clear();
-
-		return;
+		await database.domains.clear();
+		await database.goals.clear();
 	}
 }

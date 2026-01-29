@@ -1,0 +1,23 @@
+@let d = domain();
+
+@if (d) {
+	<main>
+		<div class="sm:flex flex-row-reverse justify-between items-center">
+			add domain-goals-manager here
+		</div>
+	</main>
+} @else {
+	<div class="flex items-center gap-4">
+		<p>No domain was found. Please try again.</p>
+
+		<p-button
+			label="Refresh"
+			icon="pi pi-refresh"
+			size="small"
+			rounded
+			[loading]="isFetchingDomain()"
+			[disabled]="isFetchingDomain()"
+			(onClick)="fetchDomainById()"
+		/>
+	</div>
+}

@@ -1,7 +1,7 @@
 <main>
-	<header
-		class="sm:flex flex-row-reverse justify-between items-center gap-1 space-y-2 sm:space-y-0 mb-8"
-	>
+	<header class="xs:flex justify-between items-center gap-1 mb-8">
+		<p class="mb-2 xs:mb-0 text-lg">Your domains</p>
+
 		<div class="flex items-center gap-1">
 			<p-button
 				label="Refresh"
@@ -24,8 +24,6 @@
 				(onClick)="deleteAllDomains()"
 			/>
 		</div>
-
-		<p class="text-lg">Your domains</p>
 	</header>
 
 	@if (domains().length) {
