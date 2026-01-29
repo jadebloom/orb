@@ -81,6 +81,7 @@ export class DomainPage implements OnInit {
 			width: '50vw',
 			modal: true,
 			closable: true,
+			closeOnEscape: true,
 			breakpoints: {
 				'960px': '75vw',
 				'640px': '90vw',
@@ -101,6 +102,7 @@ export class DomainPage implements OnInit {
 			width: '50vw',
 			modal: true,
 			closable: true,
+			closeOnEscape: true,
 			breakpoints: {
 				'960px': '75vw',
 				'640px': '90vw',
