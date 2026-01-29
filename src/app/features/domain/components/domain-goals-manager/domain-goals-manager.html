@@ -1,0 +1,39 @@
+<div class="xs:flex flex-row-reverse justify-between items-center gap-2 mb-8">
+	<div class="xs:flex xs:items-center gap-2 grid grid-cols-1">
+		<p-button label="New" icon="pi pi-plus" size="small" fluid rounded />
+
+		<p-button
+			label="Delete all"
+			icon="pi pi-trash"
+			size="small"
+			fluid
+			severity="danger"
+			rounded
+			(onClick)="deleteAllDomainGoals()"
+		/>
+	</div>
+
+	<p class="mt-4 xs:mt-0 text-2xl">{{ domain().name }} goals</p>
+</div>
+
+@if (domainGoals().length > 0) {
+	<div class="grid grid-cols-1">
+		@for (goal of domainGoals(); track $index) {
+			{{ goal.name }}
+		}
+	</div>
+} @else {
+	<div class="flex items-center gap-2">
+		<p>No goals were found. Try again or make sure that you have created one.</p>
+
+		<p-button
+			label="Refresh"
+			icon="pi pi-refresh"
+			size="small"
+			rounded
+			[loading]="isFetchingDomainGoals()"
+			[disabled]="isFetchingDomainGoals()"
+			(onClick)="fetchAllDomainGoals()"
+		/>
+	</div>
+}

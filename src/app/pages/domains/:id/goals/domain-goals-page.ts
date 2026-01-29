@@ -7,10 +7,11 @@ import { ButtonModule } from 'primeng/button';
 import { Domain } from '@core/database/models/domain';
 import { DEFAULT_ERROR_MESSAGE } from '@core/constants/messages';
 import { FetchDomainService } from '@features/domain/services/fetch-domain/fetch-domain.service';
+import { DomainGoalsManager } from '@features/domain/components/domain-goals-manager/domain-goals-manager';
 
 @Component({
-	selector: 'orb-domain-goals',
-	imports: [ButtonModule],
+	selector: 'orb-domain-goals-page',
+	imports: [ButtonModule, DomainGoalsManager],
 	templateUrl: './domain-goals-page.html',
 	host: {
 		class: 'flex-1 px-3',

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GoalService } from './goal.service';
+import { DomainGoalService } from './domain-goal.service';
 
-describe('GoalService', () => {
-	let service: GoalService;
+describe('DomainGoalService', () => {
+	let service: DomainGoalService;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({});
-		service = TestBed.inject(GoalService);
+		service = TestBed.inject(DomainGoalService);
 	});
 
 	it('should be created', () => {

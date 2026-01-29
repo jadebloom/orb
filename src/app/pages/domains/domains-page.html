@@ -1,19 +1,29 @@
 <main>
-	<header class="xs:flex justify-between items-center gap-1 mb-8">
-		<p class="mb-2 xs:mb-0 text-lg">Your domains</p>
-
-		<div class="flex items-center gap-1">
+	<header
+		class="xs:flex flex-row-reverse justify-between items-center gap-1 space-y-4 xs:space-y-0 mb-8"
+	>
+		<div class="xs:flex items-center gap-1 space-y-2 xs:space-y-0">
 			<p-button
 				label="Refresh"
 				icon="pi pi-refresh"
 				size="small"
 				rounded
+				fluid
+				class="block"
 				[loading]="areFetchingAllDomains()"
 				[disabled]="areFetchingAllDomains()"
 				(onClick)="fetchAllDomains()"
 			/>
 
-			<p-button label="New" icon="pi pi-plus" size="small" rounded (onClick)="createDomain()" />
+			<p-button
+				label="New"
+				icon="pi pi-plus"
+				size="small"
+				rounded
+				fluid
+				class="block"
+				(onClick)="createDomain()"
+			/>
 
 			<p-button
 				label="Delete All"
@@ -21,9 +31,13 @@
 				severity="danger"
 				size="small"
 				rounded
+				fluid
+				class="block"
 				(onClick)="deleteAllDomains()"
 			/>
 		</div>
+
+		<p class="text-2xl">Your domains</p>
 	</header>
 
 	@if (domains().length) {
