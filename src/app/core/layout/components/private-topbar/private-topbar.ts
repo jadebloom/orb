@@ -11,6 +11,6 @@ import { Menu } from '@core/layout/components/menu/menu';
 })
 export class PrivateTopbar {
 	protected visitGithub() {
-		window.open('https://github.com/the-jade-chamber/orb', '_blank', 'noopener,noreferrer');
+		window.open('https://github.com/jadebloom/orb', '_blank', 'noopener,noreferrer');
 	}
 }

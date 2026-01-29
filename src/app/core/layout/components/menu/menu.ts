@@ -70,7 +70,7 @@ export class Menu {
 					label: 'View documentation',
 					icon: 'pi pi-github',
 					action: () =>
-						window.open('https://github.com/the-jade-chamber/orb', '_blank', 'noopener,noreferrer'),
+						window.open('https://github.com/jadebloom/orb', '_blank', 'noopener,noreferrer'),
 				},
 				{
 					label: 'See author',
