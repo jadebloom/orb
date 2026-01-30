@@ -37,4 +37,8 @@ export class DomainGoalService {
 	async deleteAllDomainGoalsByDomainId(domainId: number): Promise<void> {
 		await database.domainGoals.where('domainId').equals(domainId).delete();
 	}
+
+	async deleteAllDomainGoalsByDomainGoalId(domainGoalId: number): Promise<void> {
+		await database.domainGoals.where('id').equals(domainGoalId).delete();
+	}
 }

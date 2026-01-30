@@ -11,10 +11,11 @@ import { DEFAULT_ERROR_MESSAGE } from '@core/constants/messages';
 import { FetchAllDomainGoalsService } from '@features/domain/services/fetch-all-domain-goals/fetch-all-domain-goals.service';
 import { DeleteAllDomainGoalsDialog } from '@features/domain/components/delete-all-domain-goals-dialog/delete-all-domain-goals-dialog';
 import { CreateDomainGoalDialog } from '@features/domain/components/create-domain-goal-dialog/create-domain-goal-dialog';
+import { DomainGoalsTable } from '@features/domain/components/domain-goals-table/domain-goals-table';
 
 @Component({
 	selector: 'orb-domain-goals-manager',
-	imports: [ButtonModule],
+	imports: [ButtonModule, DomainGoalsTable],
 	templateUrl: './domain-goals-manager.html',
 	providers: [DialogService],
 })

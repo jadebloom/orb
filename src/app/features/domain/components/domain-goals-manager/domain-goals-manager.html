@@ -24,11 +24,11 @@
 </div>
 
 @if (domainGoals().length > 0) {
-	<div class="grid grid-cols-1">
-		@for (goal of domainGoals(); track $index) {
-			{{ goal.name }}
-		}
-	</div>
+	<orb-domain-goals-table
+		[domainGoals]="domainGoals()"
+		[loading]="isFetchingDomainGoals()"
+		(deleted)="fetchAllDomainGoals()"
+	/>
 } @else {
 	<div class="flex items-center gap-2">
 		<p>No goals were found. Try again or make sure that you have created one.</p>
