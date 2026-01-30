@@ -1,10 +1,12 @@
-<p-menu #menu [model]="items" [popup]="true" styleClass="dark:bg-surface-900 bg-white" />
+<div class="flex justify-center">
+	<p-menu #menu [model]="items" [popup]="true" class="bg-white dark:bg-surface-900" />
 
-<p-button
-	type="button"
-	icon="pi pi-ellipsis-v"
-	text
-	rounded
-	aria-label="Open menu"
-	(onClick)="menu.toggle($event)"
-/>
+	<p-button
+		type="button"
+		icon="pi pi-ellipsis-v"
+		text
+		rounded
+		(onClick)="menu.toggle($event)"
+		aria-label="Open menu"
+	/>
+</div>

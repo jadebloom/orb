@@ -6,10 +6,10 @@ import { MessageModule } from 'primeng/message';
 import { RequiredStar } from '@toolkit/components/required-star/required-star';
 
 @Component({
-	selector: 'orb-email-input',
+	selector: 'orb-domain-goal-name-input',
 	imports: [ReactiveFormsModule, FloatLabelModule, InputTextModule, MessageModule, RequiredStar],
-	templateUrl: './email-input.html',
+	templateUrl: './domain-goal-name-input.html',
 })
-export class EmailInput {
+export class DomainGoalNameInput {
 	readonly fc = input.required<FormControl<string>>();
 }

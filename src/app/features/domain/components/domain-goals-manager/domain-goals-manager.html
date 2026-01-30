@@ -1,6 +1,13 @@
 <div class="xs:flex flex-row-reverse justify-between items-center gap-2 mb-8">
 	<div class="xs:flex xs:items-center gap-2 grid grid-cols-1">
-		<p-button label="New" icon="pi pi-plus" size="small" fluid rounded />
+		<p-button
+			label="New"
+			icon="pi pi-plus"
+			size="small"
+			fluid
+			rounded
+			(onClick)="createDomainGoal()"
+		/>
 
 		<p-button
 			label="Delete all"

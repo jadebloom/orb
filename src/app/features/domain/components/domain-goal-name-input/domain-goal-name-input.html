@@ -1,19 +1,26 @@
 <div class="space-y-2">
 	<p-floatlabel variant="on">
-		<label for="email">Enter your email <orb-required-star /></label>
+		<label for="domainGoalName">Enter goal name <orb-required-star /></label>
 
-		<input pInputText [formControl]="fc()" type="email" id="email" autofocus="off" fluid />
+		<input
+			pInputText
+			[formControl]="fc()"
+			type="text"
+			id="domainGoalName"
+			autocomplete="off"
+			fluid
+		/>
 	</p-floatlabel>
 
 	@if ((fc().touched || fc().dirty) && fc().hasError('required')) {
 		<p-message severity="error" icon="pi pi-exclamation-circle" variant="simple" size="small">
-			Email is required.
+			Name is required.
 		</p-message>
 	}
 
-	@if ((fc().touched || fc().dirty) && fc().hasError('email')) {
+	@if ((fc().touched || fc().dirty) && fc().hasError('maxlength')) {
 		<p-message severity="error" icon="pi pi-exclamation-circle" variant="simple" size="small">
-			Email should be a valid email address.
+			Name should contain at most 64 characters.
 		</p-message>
 	}
 </div>

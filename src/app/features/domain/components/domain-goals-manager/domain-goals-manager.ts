@@ -9,7 +9,8 @@ import { Domain } from '@core/database/models/domain';
 import { DomainGoal } from '@core/database/models/domain-goal';
 import { DEFAULT_ERROR_MESSAGE } from '@core/constants/messages';
 import { FetchAllDomainGoalsService } from '@features/domain/services/fetch-all-domain-goals/fetch-all-domain-goals.service';
-import { DeleteAllDomainGoalsDialog } from '../delete-all-domain-goals-dialog/delete-all-domain-goals-dialog';
+import { DeleteAllDomainGoalsDialog } from '@features/domain/components/delete-all-domain-goals-dialog/delete-all-domain-goals-dialog';
+import { CreateDomainGoalDialog } from '@features/domain/components/create-domain-goal-dialog/create-domain-goal-dialog';
 
 @Component({
 	selector: 'orb-domain-goals-manager',
@@ -62,20 +63,19 @@ export class DomainGoalsManager implements OnInit {
 			});
 	}
 
-	// protected createDomainGoal() {
-	// 	this.ref1 = this.dialogService.open(, {
-	// 		header: 'Create domain goal',
-	// 		inputValues: { initialDomainGoal: this.domain() },
-	// 		width: '50vw',
-	// 		modal: true,
-	// 		closable: true,
-	// 		closeOnEscape: true,
-	// 		breakpoints: {
-	// 			'960px': '75vw',
-	// 			'640px': '90vw',
-	// 		},
-	// 	});
-	// }
+	protected createDomainGoal() {
+		this.ref1 = this.dialogService.open(CreateDomainGoalDialog, {
+			header: 'Create domain goal',
+			width: '50vw',
+			modal: true,
+			closable: true,
+			closeOnEscape: true,
+			breakpoints: {
+				'960px': '75vw',
+				'640px': '90vw',
+			},
+		});
+	}
 
 	protected deleteAllDomainGoals() {
 		this.ref2 = this.dialogService.open(DeleteAllDomainGoalsDialog, {

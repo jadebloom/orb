@@ -3,9 +3,15 @@
 	class="flex flex-col gap-4 pt-1"
 	(ngSubmit)="createDomainGoal()"
 >
-	<!-- <orb-domain-name-input [fc]="name()" /> -->
+	<orb-domain-goal-name-input [fc]="nameFc()" />
 
-	<!-- <orb-domain-color-picker [fc]="color()" /> -->
+	<orb-domain-goal-type-toggle-switch [fc]="isGoalBooleanFc()" />
+
+	@if (isTargetValueInputVisible()) {
+		<orb-domain-goal-target-value-input [fc]="targetValueFc()" />
+	}
+
+	<orb-domain-select [fc]="domainIdFc()" />
 
 	<p-button
 		type="submit"

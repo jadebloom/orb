@@ -2,7 +2,7 @@
 	<orb-global-toasts />
 
 	<div class="bg-white dark:bg-black">
-		<div class="relative flex flex-col space-y-4 mx-auto w-full lg:max-w-5xl min-h-screen">
+		<div class="flex flex-col space-y-4 mx-auto w-full lg:max-w-5xl min-h-screen">
 			@if (authenticationService.isAuthenticated()) {
 				<orb-private-topbar />
 			} @else {

@@ -1,0 +1,48 @@
+@if (domains().length > 0) {
+	<div class="space-y-2">
+		<div class="xs:flex items-center gap-2">
+			<label for="domain" class="block mb-2 xs:mb-0">Select domain <orb-required-star />:</label>
+
+			<div class="flex items-center gap-2">
+				<p-select
+					[options]="domains()"
+					[formControl]="fc()"
+					optionLabel="name"
+					optionValue="id"
+					placeholder="Select a domain"
+					[loading]="isFetchingAllDomains()"
+				/>
+
+				<p-button
+					label="Refresh"
+					icon="pi pi-refresh"
+					size="small"
+					rounded
+					[loading]="isFetchingAllDomains()"
+					[disabled]="isFetchingAllDomains()"
+					(onClick)="fetchAllDomains()"
+				/>
+			</div>
+		</div>
+
+		@if ((fc().touched || fc().dirty) && fc().hasError('required')) {
+			<p-message severity="error" icon="pi pi-exclamation-circle" variant="simple" size="small">
+				Domain is required.
+			</p-message>
+		}
+	</div>
+} @else {
+	<div class="flex items-center gap-2">
+		<p>No domains were found.</p>
+
+		<p-button
+			label="Refresh"
+			icon="pi pi-refresh"
+			size="small"
+			rounded
+			[loading]="isFetchingAllDomains()"
+			[disabled]="isFetchingAllDomains()"
+			(onClick)="fetchAllDomains()"
+		/>
+	</div>
+}

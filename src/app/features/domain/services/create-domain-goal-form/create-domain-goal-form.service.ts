@@ -1,7 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EMPTY, finalize, Observable } from 'rxjs';
-import { DomainGoalTargetValueUnit } from '@core/database/enums/domain-goal-target-value-unit';
 import { DomainGoal } from '@core/database/models/domain-goal';
 import { CreateDomainGoalService } from '@features/domain/services/create-domain-goal/create-domain-goal.service';
 
@@ -14,11 +13,11 @@ export class CreateDomainGoalFormService {
 			nonNullable: true,
 			validators: [Validators.required, Validators.maxLength(64)],
 		}),
-		targetValue: new FormControl(1, { nonNullable: true, validators: [Validators.required] }),
-		unit: new FormControl(DomainGoalTargetValueUnit.BOOLEAN, {
+		isGoalBoolean: new FormControl(true, {
 			nonNullable: true,
 			validators: [Validators.required],
 		}),
+		targetValue: new FormControl(0, { nonNullable: true }),
 		domainId: new FormControl<number | null>(null, {
 			nonNullable: true,
 			validators: [Validators.required],
@@ -45,7 +44,7 @@ export class CreateDomainGoalFormService {
 			.createDomainGoal({
 				name: body.name,
 				targetValue: body.targetValue,
-				unit: body.unit,
+				isGoalBoolean: body.isGoalBoolean,
 				domainId: body.domainId,
 			})
 			.pipe(
