@@ -27,6 +27,7 @@
 	<orb-domain-goals-table
 		[domainGoals]="domainGoals()"
 		[loading]="isFetchingDomainGoals()"
+		(updated)="fetchAllDomainGoals()"
 		(deleted)="fetchAllDomainGoals()"
 	/>
 } @else {

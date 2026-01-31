@@ -1,0 +1,26 @@
+<form
+	[formGroup]="formService.form"
+	class="flex flex-col gap-4 pt-1"
+	(ngSubmit)="updateDomainGoal()"
+>
+	<orb-domain-goal-name-input [fc]="nameFc()" />
+
+	<orb-domain-goal-type-toggle-switch [fc]="isGoalBooleanFc()" />
+
+	@if (isTargetValueInputVisible()) {
+		<orb-domain-goal-target-value-input [fc]="targetValueFc()" />
+	}
+
+	<orb-domain-select [fc]="domainIdFc()" />
+
+	<p-button
+		type="submit"
+		label="Update"
+		icon="pi pi-pencil"
+		size="small"
+		rounded
+		fluid
+		[loading]="formService.isUpdating()"
+		[disabled]="formService.isUpdating()"
+	/>
+</form>

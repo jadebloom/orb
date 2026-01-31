@@ -2,11 +2,11 @@ import { inject, Injectable, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EMPTY, finalize, Observable } from 'rxjs';
 import { DomainGoal } from '@core/database/models/domain-goal';
-import { CreateDomainGoalService } from '@features/domain/services/create-domain-goal/create-domain-goal.service';
+import { UpdateDomainGoalService } from '@features/domain/services/update-domain-goal/update-domain-goal.service';
 
 @Injectable({ providedIn: 'root' })
-export class CreateDomainGoalFormService {
-	private readonly createDomainGoalService = inject(CreateDomainGoalService);
+export class UpdateDomainGoalFormService {
+	private readonly updateDomainGoalService = inject(UpdateDomainGoalService);
 
 	readonly form = new FormGroup({
 		name: new FormControl('', {
@@ -24,9 +24,9 @@ export class CreateDomainGoalFormService {
 		}),
 	});
 
-	readonly isCreating = signal(false);
+	readonly isUpdating = signal(false);
 
-	createDomainGoal(): Observable<DomainGoal> {
+	updateDomainGoal(domainGoalId: number): Observable<DomainGoal> {
 		const body = this.form.getRawValue();
 
 		if (this.form.invalid || body.domainId == null) {
@@ -35,13 +35,13 @@ export class CreateDomainGoalFormService {
 			return EMPTY;
 		}
 
-		if (this.isCreating()) return EMPTY;
+		if (this.isUpdating()) return EMPTY;
 
-		this.isCreating.set(true);
+		this.isUpdating.set(true);
 		this.form.disable();
 
-		return this.createDomainGoalService
-			.createDomainGoal({
+		return this.updateDomainGoalService
+			.updateDomainGoal(domainGoalId, {
 				name: body.name,
 				targetValue: body.targetValue,
 				isGoalBoolean: body.isGoalBoolean,
@@ -49,7 +49,7 @@ export class CreateDomainGoalFormService {
 			})
 			.pipe(
 				finalize(() => {
-					this.isCreating.set(false);
+					this.isUpdating.set(false);
 					this.form.enable();
 				}),
 			);

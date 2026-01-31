@@ -76,6 +76,8 @@ export class DomainGoalsManager implements OnInit {
 				'640px': '90vw',
 			},
 		});
+
+		this.ref1?.onClose.subscribe(() => this.fetchAllDomainGoals());
 	}
 
 	protected deleteAllDomainGoals() {
